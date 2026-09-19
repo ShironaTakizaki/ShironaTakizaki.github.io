@@ -1091,6 +1091,8 @@ h1 {
 }
 
 .share-count {
+  width: 100%;
+  max-width: none;
   min-block-size: auto;
   text-align: end;
 }
