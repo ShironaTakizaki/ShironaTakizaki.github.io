@@ -1079,7 +1079,7 @@ h1 {
   font-weight: 750;
 }
 
-.self-resolution > p:not(.prototype-note, .share-url, .self-finish, .self-resolution-kicker) {
+.self-resolution > p:not(.prototype-note, .share-url, .share-count, .self-finish, .self-resolution-kicker) {
   max-width: 720px;
   color: var(--md-sys-color-on-surface-variant);
 }
