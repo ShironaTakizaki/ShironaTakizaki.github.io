@@ -119,6 +119,7 @@
   const selfResolutionTitle = form.querySelector("#self-resolution-title");
   const selfFinish = form.querySelector("[data-self-finish]");
   const shareMessage = form.querySelector("[data-share-message]");
+  const shareCount = form.querySelector("[data-share-count]");
   const shareLink = form.querySelector("[data-share-link]");
   const review = form.querySelector("[data-review]");
   const reviewTitle = form.querySelector("#review-title");
@@ -214,6 +215,7 @@
 
   const updateShareHref = () => {
     const message = shareMessage.value.trim();
+    shareCount.textContent = String(shareMessage.value.length);
     const params = new URLSearchParams({ url: publicPageUrl });
     if (message) params.set("text", message);
     shareLink.href = `${xIntentUrl}?${params.toString()}`;

@@ -1090,6 +1090,11 @@ h1 {
   overflow-wrap: anywhere;
 }
 
+.share-count {
+  min-block-size: auto;
+  text-align: end;
+}
+
 .share-url span {
   margin-right: 8px;
   color: var(--md-sys-color-primary);
