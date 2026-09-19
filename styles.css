@@ -300,27 +300,30 @@ h1 {
 }
 
 .why-art {
-  min-height: 560px;
+  container-type: inline-size;
+  aspect-ratio: 1 / 1;
+  min-height: 0;
   overflow: clip;
   border-radius: 32px;
-  padding: 24px clamp(18px, 2.4vw, 32px) 28px;
+  padding: 4.2857% 5.7143% 5%;
   background: var(--md-sys-color-primary-container);
   pointer-events: none;
 }
 
 .why-tree {
   position: relative;
-  min-height: 508px;
+  height: 100%;
+  min-height: 0;
 }
 
 .why-word {
   position: absolute;
   z-index: 2;
-  top: 108px;
-  left: calc(0px - clamp(18px, 2.4vw, 32px) - 0.27em);
+  top: 21.77cqi;
+  left: -19.52cqi;
   margin: 0;
   color: var(--hero-why-word-color);
-  font-size: clamp(11rem, 19vw, 15rem);
+  font-size: 48.39cqi;
   font-weight: 900;
   letter-spacing: -0.09em;
   line-height: 1;
@@ -331,7 +334,7 @@ h1 {
 .why-branches {
   position: absolute;
   z-index: 1;
-  inset: 0 -40px;
+  inset: 0 -8.06cqi;
   margin: 0;
   padding: 0;
 }
@@ -343,11 +346,11 @@ h1 {
 }
 
 .why-tier-top {
-  top: 22px;
+  top: 4.44cqi;
 }
 
 .why-tier-bottom {
-  top: 180px;
+  top: 36.29cqi;
 }
 
 .why-branch {
@@ -376,7 +379,7 @@ h1 {
   margin: 0;
   padding: 0 2px;
   color: var(--hero-branch-color);
-  font-size: clamp(1.85rem, 2.6vw, 2.5rem);
+  font-size: 7.5cqi;
   font-weight: 800;
   letter-spacing: 0.01em;
   text-align: left;
@@ -390,12 +393,12 @@ h1 {
 .why-branch ul {
   position: relative;
   display: grid;
-  gap: 12px;
-  margin: 12px 0 0;
+  gap: 2.42cqi;
+  margin: 2.42cqi 0 0;
   padding: 0;
   border-left: 0;
   color: var(--hero-branch-color);
-  font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+  font-size: 4.9cqi;
   font-weight: 700;
   line-height: 1.4;
   list-style: none;
@@ -1233,12 +1236,6 @@ h1 {
   }
 }
 
-@media (max-width: 959px) {
-  .why-art {
-    min-height: 560px;
-  }
-}
-
 @media (max-width: 639px) {
   html {
     scroll-padding-top: 72px;
@@ -1275,63 +1272,6 @@ h1 {
   .primary-action,
   .hero-actions .button {
     width: 100%;
-  }
-
-  .why-art {
-    min-height: 620px;
-    border-radius: 28px;
-    padding: 24px 20px 28px;
-  }
-
-  .why-tree {
-    min-height: 568px;
-  }
-
-  .why-word {
-    top: 110px;
-    left: calc(0px - clamp(18px, 2.4vw, 32px) - 0.27em);
-    font-size: clamp(9rem, 48vw, 12rem);
-  }
-
-  .why-branches {
-    inset: 0 -24px;
-    margin: 0;
-    padding: 0;
-  }
-
-  .why-tier {
-    right: 0;
-    left: 0;
-  }
-
-  .why-tier-top {
-    top: 22px;
-  }
-
-  .why-tier-bottom {
-    top: 228px;
-  }
-
-  .why-branch {
-    position: absolute;
-    top: auto;
-    width: max-content;
-    min-width: max-content;
-    min-height: 0;
-    padding-left: 0;
-  }
-
-  .why-branch > p {
-    text-align: left;
-  }
-
-  .why-branch ul {
-    margin-top: 10px;
-    border-left: 0;
-  }
-
-  .why-tier-top .why-branch ul {
-    margin-top: 10px;
   }
 
   .case,
