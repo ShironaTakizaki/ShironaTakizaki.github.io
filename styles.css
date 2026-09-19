@@ -931,19 +931,18 @@ h1 {
 
 .progress-track span {
   display: block;
-  width: 16.666%;
+  width: 20%;
   height: 100%;
   border-radius: inherit;
   background: var(--md-sys-color-primary);
   transition: width 360ms var(--motion-expressive);
 }
 
-[data-progress-value="1"] .progress-track span { width: 16.666%; }
-[data-progress-value="2"] .progress-track span { width: 33.333%; }
-[data-progress-value="3"] .progress-track span { width: 50%; }
-[data-progress-value="4"] .progress-track span { width: 66.666%; }
-[data-progress-value="5"] .progress-track span { width: 83.333%; }
-[data-progress-value="6"] .progress-track span { width: 100%; }
+[data-progress-value="1"] .progress-track span { width: 20%; }
+[data-progress-value="2"] .progress-track span { width: 40%; }
+[data-progress-value="3"] .progress-track span { width: 60%; }
+[data-progress-value="4"] .progress-track span { width: 80%; }
+[data-progress-value="5"] .progress-track span { width: 100%; }
 
 .intake-form fieldset {
   min-width: 0;
@@ -961,7 +960,8 @@ h1 {
 }
 
 .intake-form legend,
-.form-review h3 {
+.form-review h3,
+.self-resolution h3 {
   width: 100%;
   margin: 0 0 28px;
   font-size: clamp(1.55rem, 3.5vw, 2.7rem);
@@ -1023,8 +1023,85 @@ h1 {
 }
 
 .js .form-step[data-active],
-.form-review:not([hidden]) {
+.form-review:not([hidden]),
+.form-path:not([hidden]),
+.form-contact:not([hidden]),
+.self-resolution:not([hidden]) {
   animation: step-in 360ms var(--motion-standard) both;
+}
+
+.path-intro {
+  margin: -12px 0 24px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.path-options {
+  gap: 8px;
+}
+
+.js .path-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.path-option {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 20px;
+  padding: 22px;
+  background: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 180ms var(--motion-expressive), box-shadow 180ms var(--motion-standard), background-color 180ms var(--motion-standard);
+}
+
+.path-option strong {
+  color: var(--md-sys-color-primary);
+  font-size: 1.08rem;
+}
+
+.path-option span {
+  color: var(--md-sys-color-on-surface-variant);
+  line-height: 1.5;
+}
+
+.path-option:focus-visible {
+  outline: 3px solid var(--md-sys-color-primary);
+  outline-offset: 3px;
+}
+
+.self-resolution-kicker {
+  margin: 0 0 8px;
+  color: var(--md-sys-color-primary);
+  font-weight: 750;
+}
+
+.self-resolution > p:not(.prototype-note, .share-url, .self-finish, .self-resolution-kicker) {
+  max-width: 720px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.share-url {
+  margin: 10px 0 0;
+  color: var(--md-sys-color-on-surface-variant);
+  overflow-wrap: anywhere;
+}
+
+.share-url span {
+  margin-right: 8px;
+  color: var(--md-sys-color-primary);
+  font-weight: 750;
+}
+
+.self-finish {
+  margin: 24px 0 0;
+  border-radius: 14px;
+  padding: 18px;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
 }
 
 .form-review dl {
@@ -1093,6 +1170,16 @@ h1 {
 
   .why-back:hover {
     background: var(--md-sys-color-surface-container-high);
+  }
+
+  .path-option:hover {
+    transform: translateY(-2px);
+    background: var(--md-sys-color-surface-container-highest);
+    box-shadow: var(--shadow-1);
+  }
+
+  .path-option:active {
+    transform: scale(0.98);
   }
 
   .scope-card,
@@ -1260,6 +1347,10 @@ h1 {
     width: 100%;
   }
 
+  .js .path-options {
+    grid-template-columns: 1fr;
+  }
+
   .footer-inner {
     align-items: flex-start;
     flex-direction: column;
@@ -1300,6 +1391,8 @@ h1 {
   .scope-card:hover,
   .case:hover,
   .why-category:hover,
+  .path-option:hover,
+  .path-option:active,
   .case-detail[open] summary::after {
     transform: none;
   }

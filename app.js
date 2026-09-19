@@ -112,10 +112,20 @@
   if (!form) return;
 
   const steps = Array.from(form.querySelectorAll("[data-step]"));
+  const pathStep = form.querySelector("[data-path-step]");
+  const contactStep = form.querySelector("[data-contact-step]");
+  const contactControl = form.elements.namedItem("contact");
+  const selfResolution = form.querySelector("[data-self-resolution]");
+  const selfResolutionTitle = form.querySelector("#self-resolution-title");
+  const selfFinish = form.querySelector("[data-self-finish]");
+  const shareMessage = form.querySelector("[data-share-message]");
+  const shareLink = form.querySelector("[data-share-link]");
   const review = form.querySelector("[data-review]");
   const reviewTitle = form.querySelector("#review-title");
   const progressWrap = form.querySelector("[data-progress-wrap]");
   const progressText = form.querySelector("[data-progress-text]");
+  const publicPageUrl = "https://shironatakizaki.github.io/";
+  const xIntentUrl = "https://x.com/intent/tweet";
   let currentStep = 0;
 
   form.addEventListener("submit", (event) => event.preventDefault());
@@ -125,15 +135,28 @@
     window.requestAnimationFrame(() => element.focus());
   };
 
-  const updateProgress = () => {
+  const updateQuestionProgress = () => {
     const value = String(currentStep + 1);
     progressText.textContent = `${value} / ${steps.length}`;
     progressWrap.dataset.progressValue = value;
   };
 
+  const hideAllViews = () => {
+    steps.forEach((step) => {
+      step.hidden = true;
+      step.removeAttribute("data-active");
+      step.setAttribute("aria-hidden", "true");
+    });
+    pathStep.hidden = true;
+    contactStep.hidden = true;
+    selfResolution.hidden = true;
+    review.hidden = true;
+  };
+
   const showStep = (index, moveFocus = true) => {
     currentStep = Math.max(0, Math.min(index, steps.length - 1));
-    review.hidden = true;
+    contactControl.required = false;
+    hideAllViews();
     progressWrap.hidden = false;
 
     steps.forEach((step, stepIndex) => {
@@ -143,7 +166,7 @@
       step.setAttribute("aria-hidden", String(!active));
     });
 
-    updateProgress();
+    updateQuestionProgress();
     if (moveFocus) focusElement(steps[currentStep].querySelector("textarea, input"));
   };
 
@@ -158,13 +181,52 @@
   };
 
   const showFirstInvalidStep = () => {
-    const invalidControl = form.querySelector(":invalid");
+    const invalidControl = steps
+      .map((step) => step.querySelector(":invalid"))
+      .find(Boolean);
     if (!invalidControl) return false;
     const invalidStep = invalidControl.closest("[data-step]");
     showStep(steps.indexOf(invalidStep));
     invalidControl.reportValidity();
     invalidControl.focus();
     return true;
+  };
+
+  const showPathStep = () => {
+    contactControl.required = false;
+    hideAllViews();
+    pathStep.hidden = false;
+    progressWrap.hidden = false;
+    progressText.textContent = "回答後の選択";
+    progressWrap.dataset.progressValue = String(steps.length);
+    focusElement(pathStep.querySelector("legend"));
+  };
+
+  const showContactStep = () => {
+    contactControl.required = true;
+    hideAllViews();
+    contactStep.hidden = false;
+    progressWrap.hidden = false;
+    progressText.textContent = "返信先";
+    progressWrap.dataset.progressValue = String(steps.length);
+    focusElement(contactControl);
+  };
+
+  const updateShareHref = () => {
+    const message = shareMessage.value.trim();
+    const params = new URLSearchParams({ url: publicPageUrl });
+    if (message) params.set("text", message);
+    shareLink.href = `${xIntentUrl}?${params.toString()}`;
+  };
+
+  const showSelfResolution = () => {
+    contactControl.required = false;
+    hideAllViews();
+    progressWrap.hidden = true;
+    selfResolution.hidden = false;
+    selfFinish.hidden = true;
+    updateShareHref();
+    focusElement(selfResolutionTitle);
   };
 
   const populateReview = () => {
@@ -175,21 +237,21 @@
   };
 
   const showReview = () => {
-    if (!form.checkValidity()) {
-      showFirstInvalidStep();
+    if (!contactControl.checkValidity()) {
+      contactControl.reportValidity();
+      contactControl.focus();
       return;
     }
+    if (showFirstInvalidStep()) return;
 
     populateReview();
-    steps.forEach((step) => {
-      step.hidden = true;
-      step.removeAttribute("data-active");
-      step.setAttribute("aria-hidden", "true");
-    });
+    hideAllViews();
     progressWrap.hidden = true;
     review.hidden = false;
     focusElement(reviewTitle);
   };
+
+  shareMessage.addEventListener("input", updateShareHref);
 
   form.addEventListener("click", (event) => {
     const button = event.target.closest("button[data-action]");
@@ -197,16 +259,34 @@
 
     switch (button.dataset.action) {
       case "next":
-        if (validateCurrent()) showStep(currentStep + 1);
+        if (!validateCurrent()) break;
+        if (currentStep === steps.length - 1) showPathStep();
+        else showStep(currentStep + 1);
         break;
       case "prev":
         showStep(currentStep - 1);
         break;
+      case "back-to-questions":
+        showStep(steps.length - 1);
+        break;
+      case "back-to-path":
+        showPathStep();
+        break;
+      case "choose-continue":
+        showContactStep();
+        break;
+      case "choose-self":
+        showSelfResolution();
+        break;
       case "review":
-        if (validateCurrent()) showReview();
+        showReview();
         break;
       case "edit":
-        showStep(steps.length - 1);
+        showContactStep();
+        break;
+      case "finish-self":
+        selfFinish.hidden = false;
+        focusElement(selfFinish);
         break;
       default:
         break;
@@ -214,5 +294,6 @@
   });
 
   progressWrap.hidden = false;
+  updateShareHref();
   showStep(0, false);
 })();

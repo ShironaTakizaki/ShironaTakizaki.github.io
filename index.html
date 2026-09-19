@@ -11,9 +11,9 @@
   <meta property="og:title" content="脱属人化 — 滝咲白菜 / Shirona Takizaki">
   <meta property="og:description" content="『あの人だからできる』を、『なぜできるか』から組み直す。">
   <title>脱属人化 — 滝咲白菜 / Shirona Takizaki</title>
-  <link rel="stylesheet" href="styles.css?v=hero-color-pair-1">
+  <link rel="stylesheet" href="styles.css?v=self-resolution-share-1">
   <script src="why-details.js?v=why-detail-2" defer></script>
-  <script src="app.js?v=form-guard-1" defer></script>
+  <script src="app.js?v=self-resolution-share-1" defer></script>
 </head>
 <body>
   <svg class="svg-defs" aria-hidden="true" focusable="false">
@@ -285,11 +285,11 @@
         <div class="section-heading">
           <h2 id="intake-title">まず、話を聞かせてください</h2>
         </div>
-        <p class="intake-intro">五つの質問への回答と返信先を受け取ります。「分からない」「何もしなかった」も有効な回答です。住所、電話番号、予算、ファイル添付、機密情報は初回に求めません。</p>
+        <p class="intake-intro">五つの質問に答えた後で、相談を続けるか、いったん自分で進めるかを選べます。「分からない」「何もしなかった」も有効な回答です。住所、電話番号、予算、ファイル添付、機密情報は初回に求めません。</p>
 
         <form class="intake-form" data-step-form novalidate>
           <div class="form-progress js-only" data-progress-wrap hidden>
-            <p data-progress-text aria-live="polite">1 / 6</p>
+            <p data-progress-text aria-live="polite">1 / 5</p>
             <div class="progress-track" aria-hidden="true"><span data-progress-bar></span></div>
           </div>
 
@@ -333,13 +333,45 @@
             <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="prev">前へ</button><button class="button button-filled" type="button" data-action="next">次へ</button></div>
           </fieldset>
 
-          <fieldset class="form-step" data-step="6">
+          <fieldset class="form-path" data-path-step>
+            <legend tabindex="-1">書いているうちに、次にすることが見えましたか？</legend>
+            <p class="path-intro">どちらを選んでも、ここまでの回答は送信も保存もされません。</p>
+            <div class="path-options js-only">
+              <button class="path-option" type="button" data-action="choose-continue">
+                <strong>相談を続ける</strong>
+                <span>返信先を入力し、相談内容を確認します。</span>
+              </button>
+              <button class="path-option" type="button" data-action="choose-self">
+                <strong>いったん自分で進める</strong>
+                <span>返信先を入力せず、助かった体験だけを共有できます。</span>
+              </button>
+            </div>
+            <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="back-to-questions">前へ</button></div>
+          </fieldset>
+
+          <fieldset class="form-contact" data-contact-step>
             <legend tabindex="-1">返信先を教えてください</legend>
             <label for="contact">メールアドレス</label>
-            <input id="contact" name="contact" type="email" autocomplete="email" maxlength="254" required>
-            <p class="field-hint">この試作では、入力内容はどこにも送信されません。254文字までです。</p>
-            <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="prev">前へ</button><button class="button button-filled" type="button" data-action="review">入力内容を確認する</button></div>
+            <input id="contact" name="contact" type="email" autocomplete="email" maxlength="254">
+            <p class="field-hint">相談を続ける場合だけ使います。この試作では、入力内容はどこにも送信されません。254文字までです。</p>
+            <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="back-to-path">前へ</button><button class="button button-filled" type="button" data-action="review">入力内容を確認する</button></div>
           </fieldset>
+
+          <section class="self-resolution" data-self-resolution aria-labelledby="self-resolution-title">
+            <p class="self-resolution-kicker">いったん自分で進める</p>
+            <h3 id="self-resolution-title" tabindex="-1">ここで終えて構いません。</h3>
+            <p>入力内容は送信も保存もされません。𝕏（旧twitter）へ渡すのは、下の投稿文とこのページのURLだけです。</p>
+            <label for="share-message">𝕏（旧twitter）へ渡す投稿文</label>
+            <textarea id="share-message" data-share-message rows="5" maxlength="200">このページの、たった5つの問いに答えていたら、迷っていたことが不思議と自分で次へ進めるところまで考えられました。非常に助かりました！</textarea>
+            <p class="share-url"><span>添えるURL</span> https://shironatakizaki.github.io/</p>
+            <p class="prototype-note" id="share-boundary">フォーム回答、返信先、回答から生成した要約は𝕏（旧twitter）へ渡しません。投稿内容は𝕏（旧twitter）上でも編集または中止できます。</p>
+            <div class="step-actions">
+              <button class="button button-outlined js-only" type="button" data-action="back-to-path">選択へ戻る</button>
+              <a class="button button-filled" data-share-link href="https://x.com/intent/tweet?text=このページの、たった5つの問いに答えていたら、迷っていたことが不思議と自分で次へ進めるところまで考えられました。非常に助かりました！&amp;url=https%3A%2F%2Fshironatakizaki.github.io%2F" target="_blank" rel="noopener noreferrer" aria-describedby="share-boundary">𝕏（旧twitter）で感動を伝える</a>
+              <button class="button button-tonal js-only" type="button" data-action="finish-self">投稿せず終了する</button>
+            </div>
+            <p class="self-finish" data-self-finish hidden tabindex="-1">ここまでで終了しました。入力内容は送信も保存もされていません。</p>
+          </section>
 
           <section class="form-review" data-review hidden aria-labelledby="review-title">
             <h3 id="review-title" tabindex="-1">入力内容の確認</h3>
