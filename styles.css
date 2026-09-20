@@ -1265,10 +1265,6 @@ h1 {
     font-size: clamp(3.6rem, 20vw, 5.6rem);
   }
 
-  .hero-thesis br {
-    display: none;
-  }
-
   .primary-action,
   .hero-actions .button {
     width: 100%;
