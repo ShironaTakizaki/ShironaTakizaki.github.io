@@ -118,10 +118,6 @@ a {
   display: none !important;
 }
 
-.svg-defs {
-  display: none;
-}
-
 .page-shell {
   width: min(calc(100% - 2 * var(--page-gutter)), var(--page-width));
   margin-inline: auto;
@@ -203,7 +199,6 @@ a {
 }
 
 .eyebrow,
-.case-number,
 .card-label {
   margin: 0;
   color: var(--md-sys-color-primary);
@@ -500,39 +495,49 @@ h1 {
   font-weight: 700;
 }
 
-.summary-icon {
-  width: 22px;
-  height: 22px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
 .case-list {
   display: grid;
   gap: clamp(36px, 6vw, 72px);
 }
 
 .case {
+  min-width: 0;
   border-radius: 28px;
-  padding: clamp(20px, 4vw, 40px);
   background: var(--md-sys-color-surface-container);
   box-shadow: var(--shadow-1);
 }
 
-.case-number {
-  margin-bottom: 14px;
+.case-explanation {
+  overflow: clip;
+  border-radius: inherit;
 }
 
-.case-pair {
+.case-summary {
+  display: grid;
+  gap: 24px;
+  padding: clamp(24px, 4vw, 40px);
+  color: var(--md-sys-color-on-surface);
+  list-style: none;
+  cursor: pointer;
+  transition: background-color 180ms var(--motion-standard), box-shadow 180ms var(--motion-standard), transform 180ms var(--motion-expressive);
+}
+
+.case-summary::-webkit-details-marker {
+  display: none;
+}
+
+.case-summary:focus-visible {
+  outline: 3px solid var(--md-sys-color-primary);
+  outline-offset: -3px;
+}
+
+.case-summary-copy {
   display: grid;
   gap: 8px;
 }
 
 .case-question,
-.case-best {
+.case-answer {
   min-width: 0;
   border-radius: var(--radius-card);
   padding: clamp(22px, 3vw, 34px);
@@ -543,139 +548,69 @@ h1 {
   background: var(--md-sys-color-surface-container-low);
 }
 
-.case-best {
+.case-answer {
   background: var(--md-sys-color-primary-container);
   color: var(--md-sys-color-on-primary-container);
 }
 
-.case-question h3,
-.case-best p {
-  margin: 8px 0 0;
+.case-question-text,
+.case-answer-text {
+  display: block;
+  margin-top: 8px;
   font-size: clamp(1.2rem, 2vw, 1.65rem);
   font-weight: 600;
   line-height: 1.45;
 }
 
-.case-best .card-label {
+.case-answer .card-label {
   color: currentColor;
 }
 
-.case-disclosures {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 8px;
-  justify-content: end;
-  margin-top: 16px;
-}
-
-.case-detail {
-  min-width: 0;
-  overflow: clip;
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--radius-card);
-  background: var(--md-sys-color-surface-container-low);
-}
-
-.case-detail[open] {
-  order: 2;
-  flex: 0 0 100%;
-  width: 100%;
-}
-
-.case-detail summary {
-  display: flex;
-  min-height: 56px;
+.case-toggle {
+  display: inline-flex;
+  min-height: 48px;
   align-items: center;
-  gap: 16px;
-  padding: 0 18px;
-  border-radius: inherit;
-  color: var(--md-sys-color-on-surface);
-  font-weight: 700;
-  list-style: none;
-  cursor: pointer;
-  transition: background-color 180ms var(--motion-standard), color 180ms var(--motion-standard);
+  justify-self: end;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 0 20px;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-weight: 750;
 }
 
-.case-detail summary::-webkit-details-marker {
-  display: none;
-}
-
-.case-detail summary::after {
+.case-toggle::after {
   content: "+";
-  margin-left: auto;
   color: var(--md-sys-color-primary);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: 1;
   transition: transform 280ms var(--motion-expressive);
 }
 
-.case-detail:not([open]) {
-  order: 1;
-  flex: 0 0 auto;
-  border-color: transparent;
-  border-radius: 999px;
-}
-
-.case-why:not([open]) {
-  background: var(--md-sys-color-surface-container-low);
-  color: var(--md-sys-color-primary);
-  box-shadow: var(--shadow-1);
-}
-
-.case-options:not([open]) {
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-}
-
-.case-detail:not([open]) summary {
-  width: 54px;
-  justify-content: center;
-  padding: 0;
-  border-radius: 999px;
-  color: inherit;
-}
-
-.case-detail:not([open]) summary::after {
+.case-toggle-open {
   display: none;
 }
 
-.case-detail:not([open]) .summary-text {
+.case-explanation[open] .case-toggle-closed {
   display: none;
 }
 
-.case:first-child .case-detail:not([open]) summary {
-  width: auto;
-  min-width: 112px;
-  gap: 10px;
-  padding: 0 20px;
-}
-
-.case:first-child .case-detail:not([open]) .summary-text {
+.case-explanation[open] .case-toggle-open {
   display: inline;
 }
 
-.case-detail[open] summary {
-  border-radius: var(--radius-card) var(--radius-card) 0 0;
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
+.case-explanation[open] .case-toggle::after {
+  transform: rotate(45deg);
 }
 
-.case-detail[open] summary::after {
-  transform: rotate(45deg);
+.case-explanation > .details-body {
+  border-top: 1px solid var(--md-sys-color-outline-variant);
 }
 
 .details-body {
   padding: clamp(20px, 4vw, 34px);
   animation: details-in 260ms var(--motion-standard) both;
-}
-
-.current-target {
-  margin: 0 0 24px;
-  border-left: 4px solid var(--md-sys-color-primary);
-  padding-left: 16px;
-  color: var(--md-sys-color-on-surface-variant);
 }
 
 .why-grid {
@@ -792,48 +727,6 @@ h1 {
   color: var(--md-sys-color-on-surface-variant);
 }
 
-.option-list {
-  display: grid;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  counter-reset: option;
-  list-style: none;
-}
-
-.option-list li {
-  display: grid;
-  grid-template-columns: 28px minmax(0, 1fr);
-  column-gap: 16px;
-  border-radius: 16px;
-  padding: 22px;
-  background: var(--md-sys-color-surface-container-high);
-  counter-increment: option;
-}
-
-.option-list li::before {
-  content: counter(option, decimal-leading-zero);
-  grid-row: 1 / span 3;
-  grid-column: 1;
-  color: var(--md-sys-color-primary);
-  font-weight: 750;
-}
-
-.option-list h4,
-.option-list p {
-  grid-column: 2;
-  margin: 0;
-}
-
-.option-list h4 {
-  margin-bottom: 12px;
-  font-size: 1.04rem;
-}
-
-.option-list p + p {
-  margin-top: 6px;
-}
-
 .method-list {
   display: grid;
   gap: 3px;
@@ -872,30 +765,6 @@ h1 {
 
 .method-boundary {
   margin-top: 24px;
-}
-
-.evidence-layout {
-  display: grid;
-  gap: 32px;
-}
-
-.evidence-copy {
-  border-radius: 28px;
-  padding: clamp(24px, 5vw, 56px);
-  background: var(--md-sys-color-inverse-surface);
-  color: var(--md-sys-color-inverse-on-surface);
-}
-
-.evidence-copy > :first-child {
-  margin-top: 0;
-}
-
-.evidence-copy > :last-child {
-  margin-bottom: 0;
-}
-
-.evidence-copy li + li {
-  margin-top: 12px;
 }
 
 .intake-intro {
@@ -1169,8 +1038,12 @@ h1 {
     transform: scale(0.97);
   }
 
-  .case-detail summary:hover {
+  .case-summary:hover {
     background: var(--md-sys-color-surface-container-high);
+  }
+
+  .case-summary:active {
+    transform: scale(0.995);
   }
 
   .why-category:hover {
@@ -1192,13 +1065,11 @@ h1 {
     transform: scale(0.98);
   }
 
-  .scope-card,
-  .case {
+  .scope-card {
     transition: transform 240ms var(--motion-expressive), box-shadow 240ms var(--motion-standard);
   }
 
-  .scope-card:hover,
-  .case:hover {
+  .scope-card:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-1);
   }
@@ -1213,7 +1084,7 @@ h1 {
     grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.4fr);
   }
 
-  .case-pair {
+  .case-summary-copy {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr);
   }
 
@@ -1225,15 +1096,6 @@ h1 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .evidence-layout {
-    grid-template-columns: minmax(280px, 0.7fr) minmax(0, 1.3fr);
-    align-items: start;
-  }
-
-  .evidence-layout .section-heading {
-    position: sticky;
-    top: 104px;
-  }
 }
 
 @media (max-width: 639px) {
@@ -1273,12 +1135,6 @@ h1 {
   .case,
   .intake-form {
     border-radius: 20px;
-  }
-
-  .option-list li {
-    grid-template-columns: 24px minmax(0, 1fr);
-    column-gap: 12px;
-    padding: 20px 18px;
   }
 
   .method-list li {
@@ -1332,11 +1188,12 @@ h1 {
   .button:hover,
   .button:active,
   .scope-card:hover,
-  .case:hover,
+  .case-summary:hover,
+  .case-summary:active,
   .why-category:hover,
   .path-option:hover,
   .path-option:active,
-  .case-detail[open] summary::after {
+  .case-toggle::after {
     transform: none;
   }
 }

@@ -10,7 +10,7 @@
 
   const enhanceWhyDetails = () => {
     try {
-      const payload = window.__WHY_DETAILS__;
+      const payload = window.__PAGE_QA_CASES__;
       if (!payload || !Array.isArray(payload.cases)) {
         throw new Error("why detail data is unavailable");
       }
@@ -19,7 +19,7 @@
       document.querySelectorAll("[data-why-case]").forEach((caseElement) => {
         const whyCase = casesById.get(caseElement.dataset.whyCase);
         const overview = caseElement.querySelector("[data-why-overview]");
-        const outerDetails = overview?.closest(".case-why");
+        const outerDetails = overview?.closest(".case-explanation");
         if (!whyCase || !overview || !outerDetails) return;
 
         const detailView = document.createElement("section");
@@ -54,7 +54,7 @@
 
         const showDetail = (classification, button) => {
           originatingButton = button;
-          detailKicker.textContent = `なぜ？ / ${classification.label}`;
+          detailKicker.textContent = `詳しく / ${classification.label}`;
           detailTitle.textContent = classification.label;
           detailSummary.textContent = classification.closedSummary;
           detailList.replaceChildren();
