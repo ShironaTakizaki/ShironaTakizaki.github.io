@@ -125,11 +125,22 @@
   const reviewTitle = form.querySelector("#review-title");
   const progressWrap = form.querySelector("[data-progress-wrap]");
   const progressText = form.querySelector("[data-progress-text]");
+  const fieldCounts = Array.from(form.querySelectorAll("[data-field-count]"));
   const publicPageUrl = "https://shironatakizaki.github.io/";
   const xIntentUrl = "https://x.com/intent/tweet";
   let currentStep = 0;
 
   form.addEventListener("submit", (event) => event.preventDefault());
+
+  fieldCounts.forEach((output) => {
+    const control = form.elements.namedItem(output.dataset.fieldCount);
+    if (!control) return;
+    const updateFieldCount = () => {
+      output.textContent = String(control.value.length);
+    };
+    control.addEventListener("input", updateFieldCount);
+    updateFieldCount();
+  });
 
   const focusElement = (element) => {
     if (!element) return;

@@ -11,9 +11,9 @@
   <meta property="og:title" content="脱属人化 — 滝咲白菜 / Shirona Takizaki">
   <meta property="og:description" content="『あの人だからできる』を、『なぜできるか』から組み直す。">
   <title>脱属人化 — 滝咲白菜 / Shirona Takizaki</title>
-  <link rel="stylesheet" href="styles.css?v=third-question-1">
-  <script src="why-details.js?v=third-question-1" defer></script>
-  <script src="app.js?v=third-question-1" defer></script>
+  <link rel="stylesheet" href="styles.css?v=form-counts-1">
+  <script src="why-details.js?v=mismatch-copy-1" defer></script>
+  <script src="app.js?v=form-counts-1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">本文へ移動</a>
@@ -209,7 +209,6 @@
         <div class="section-heading">
           <h2 id="intake-title">まず、話を聞かせてください</h2>
         </div>
-        <p class="intake-intro">五つの質問に答えた後で、相談を続けるか、いったん自分で進めるかを選べます。「分からない」「何もしなかった」も有効な回答です。住所、電話番号、予算、ファイル添付、機密情報は初回に求めません。</p>
 
         <form class="intake-form" data-step-form novalidate>
           <div class="form-progress js-only" data-progress-wrap hidden>
@@ -220,40 +219,52 @@
           <fieldset class="form-step" data-step="1">
             <legend tabindex="-1">どうなれば、いまよりよいと思いますか？</legend>
             <label for="wish">願望</label>
-            <textarea id="wish" name="wish" rows="6" maxlength="1000" required></textarea>
-            <p class="field-hint">「分からない」も回答として扱います。最大1000文字です。</p>
+            <textarea id="wish" name="wish" rows="6" maxlength="1000" placeholder="例：チームのメンバーが、私の指示を待たずに自律的に動いていてほしい" aria-describedby="wish-hint wish-count" required></textarea>
+            <div class="field-support">
+              <p class="field-hint" id="wish-hint">「分からない」も回答として扱います。</p>
+              <p class="field-count" id="wish-count"><span data-field-count="wish">0</span> / 1000</p>
+            </div>
             <div class="step-actions js-only"><button class="button button-filled" type="button" data-action="next">次へ</button></div>
           </fieldset>
 
           <fieldset class="form-step" data-step="2">
             <legend tabindex="-1">そう思った具体的な場面は何ですか？</legend>
             <label for="scene">具体場面</label>
-            <textarea id="scene" name="scene" rows="6" maxlength="1000" required></textarea>
-            <p class="field-hint">最大1000文字です。</p>
+            <textarea id="scene" name="scene" rows="6" maxlength="1000" placeholder="例：私が席を外すたびに判断が止まり、戻るまで作業が進まなかった" aria-describedby="scene-count" required></textarea>
+            <div class="field-support">
+              <p class="field-count" id="scene-count"><span data-field-count="scene">0</span> / 1000</p>
+            </div>
             <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="prev">前へ</button><button class="button button-filled" type="button" data-action="next">次へ</button></div>
           </fieldset>
 
           <fieldset class="form-step" data-step="3">
             <legend tabindex="-1">何をしましたか？ 何をしないと決めましたか？</legend>
             <label for="action">したこと／しなかったこと</label>
-            <textarea id="action" name="action" rows="6" maxlength="1000" required></textarea>
-            <p class="field-hint">「何もしなかった」も有効な回答です。最大1000文字です。</p>
+            <textarea id="action" name="action" rows="6" maxlength="1000" placeholder="例：自分で判断できることに気づくまで待った" aria-describedby="action-hint action-count" required></textarea>
+            <div class="field-support">
+              <p class="field-hint" id="action-hint">「何もしなかった」も有効な回答です。</p>
+              <p class="field-count" id="action-count"><span data-field-count="action">0</span> / 1000</p>
+            </div>
             <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="prev">前へ</button><button class="button button-filled" type="button" data-action="next">次へ</button></div>
           </fieldset>
 
           <fieldset class="form-step" data-step="4">
             <legend tabindex="-1">何が起き、何に気づきましたか？</legend>
             <label for="response">反応と気づき</label>
-            <textarea id="response" name="response" rows="6" maxlength="1000" required></textarea>
-            <p class="field-hint">最大1000文字です。</p>
+            <textarea id="response" name="response" rows="6" maxlength="1000" placeholder="例：作業は止まったままだった。任せるだけで、判断の基準は共有していなかったと気づいた" aria-describedby="response-count" required></textarea>
+            <div class="field-support">
+              <p class="field-count" id="response-count"><span data-field-count="response">0</span> / 1000</p>
+            </div>
             <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="prev">前へ</button><button class="button button-filled" type="button" data-action="next">次へ</button></div>
           </fieldset>
 
           <fieldset class="form-step" data-step="5">
             <legend tabindex="-1">何を守りたい、または変えたいと思いましたか？</legend>
             <label for="principle">守りたいこと／変えたいこと</label>
-            <textarea id="principle" name="principle" rows="6" maxlength="1000" required></textarea>
-            <p class="field-hint">最大1000文字です。</p>
+            <textarea id="principle" name="principle" rows="6" maxlength="1000" aria-describedby="principle-count" required></textarea>
+            <div class="field-support">
+              <p class="field-count" id="principle-count"><span data-field-count="principle">0</span> / 1000</p>
+            </div>
             <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="prev">前へ</button><button class="button button-filled" type="button" data-action="next">次へ</button></div>
           </fieldset>
 

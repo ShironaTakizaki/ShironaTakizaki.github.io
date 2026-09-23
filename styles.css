@@ -767,12 +767,6 @@ h1 {
   margin-top: 24px;
 }
 
-.intake-intro {
-  max-width: 820px;
-  margin: -20px 0 40px;
-  color: var(--md-sys-color-on-surface-variant);
-}
-
 .intake-form {
   border-radius: 28px;
   padding: clamp(20px, 5vw, 56px);
@@ -866,6 +860,11 @@ h1 {
   resize: vertical;
 }
 
+.intake-form textarea::placeholder {
+  color: var(--md-sys-color-on-surface-variant);
+  opacity: 0.64;
+}
+
 .intake-form input {
   min-height: 56px;
 }
@@ -880,6 +879,30 @@ h1 {
   margin: 8px 0 0;
   min-block-size: calc(1.45em * 3);
   line-height: 1.45;
+}
+
+.field-support {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 16px;
+  align-items: start;
+  min-block-size: calc(1.45em * 3);
+  margin-top: 8px;
+}
+
+.field-support .field-hint,
+.field-count {
+  min-block-size: 0;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.field-count {
+  grid-column: 2;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.93rem;
+  text-align: end;
+  white-space: nowrap;
 }
 
 .js-only {
