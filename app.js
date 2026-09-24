@@ -22,6 +22,12 @@
         const outerDetails = overview?.closest(".case-explanation");
         if (!whyCase || !overview || !outerDetails) return;
 
+        const isGuidedCase = caseElement.dataset.whyCase === "page-qa-case-1";
+        const attentionClass = "attention-wave";
+        let caseAcknowledged = outerDetails.open;
+        let situationAcknowledged = false;
+        let situationButton = null;
+
         const detailView = document.createElement("section");
         detailView.className = "why-detail-view";
         detailView.hidden = true;
@@ -43,6 +49,17 @@
         overview.after(detailView);
 
         let originatingButton = null;
+
+        const syncAttentionGuide = () => {
+          if (!isGuidedCase) return;
+          caseElement.classList.toggle(attentionClass, !caseAcknowledged);
+          if (situationButton) {
+            situationButton.classList.toggle(
+              attentionClass,
+              caseAcknowledged && !situationAcknowledged,
+            );
+          }
+        };
 
         const showOverview = (moveFocus = true) => {
           detailView.hidden = true;
@@ -91,14 +108,28 @@
             createTextElement("p", "", classification.closedSummary),
             createTextElement("span", "why-category-action", "詳細を見る →"),
           );
-          button.addEventListener("click", () => showDetail(classification, button));
+          if (isGuidedCase && classification.key === "situation") {
+            situationButton = button;
+          }
+          button.addEventListener("click", () => {
+            if (button === situationButton) {
+              situationAcknowledged = true;
+              syncAttentionGuide();
+            }
+            showDetail(classification, button);
+          });
           sourceCard.replaceWith(button);
         });
 
         backButton.addEventListener("click", () => showOverview());
         outerDetails.addEventListener("toggle", () => {
+          if (isGuidedCase && outerDetails.open && !caseAcknowledged) {
+            caseAcknowledged = true;
+            syncAttentionGuide();
+          }
           if (!outerDetails.open && !detailView.hidden) showOverview(false);
         });
+        syncAttentionGuide();
         overview.dataset.enhanced = "true";
       });
     } catch (error) {
@@ -107,6 +138,29 @@
   };
 
   enhanceWhyDetails();
+
+  const enhanceMethodMotion = () => {
+    const motions = Array.from(document.querySelectorAll("[data-method-motion]"));
+    if (!motions.length) return;
+
+    if (!("IntersectionObserver" in window)) {
+      motions.forEach((motion) => motion.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.42 },
+    );
+
+    motions.forEach((motion) => observer.observe(motion));
+  };
+
+  enhanceMethodMotion();
 
   const form = document.querySelector("[data-step-form]");
   if (!form) return;
