@@ -166,9 +166,6 @@
   if (!form) return;
 
   const steps = Array.from(form.querySelectorAll("[data-step]"));
-  const pathStep = form.querySelector("[data-path-step]");
-  const contactStep = form.querySelector("[data-contact-step]");
-  const contactControl = form.elements.namedItem("contact");
   const selfResolution = form.querySelector("[data-self-resolution]");
   const selfResolutionTitle = form.querySelector("#self-resolution-title");
   const selfFinish = form.querySelector("[data-self-finish]");
@@ -213,15 +210,12 @@
       step.removeAttribute("data-active");
       step.setAttribute("aria-hidden", "true");
     });
-    pathStep.hidden = true;
-    contactStep.hidden = true;
     selfResolution.hidden = true;
     review.hidden = true;
   };
 
   const showStep = (index, moveFocus = true) => {
     currentStep = Math.max(0, Math.min(index, steps.length - 1));
-    contactControl.required = false;
     hideAllViews();
     progressWrap.hidden = false;
 
@@ -258,26 +252,6 @@
     return true;
   };
 
-  const showPathStep = () => {
-    contactControl.required = false;
-    hideAllViews();
-    pathStep.hidden = false;
-    progressWrap.hidden = false;
-    progressText.textContent = "回答後の選択";
-    progressWrap.dataset.progressValue = String(steps.length);
-    focusElement(pathStep.querySelector("legend"));
-  };
-
-  const showContactStep = () => {
-    contactControl.required = true;
-    hideAllViews();
-    contactStep.hidden = false;
-    progressWrap.hidden = false;
-    progressText.textContent = "返信先";
-    progressWrap.dataset.progressValue = String(steps.length);
-    focusElement(contactControl);
-  };
-
   const updateShareHref = () => {
     const message = shareMessage.value.trim();
     shareCount.textContent = String(shareMessage.value.length);
@@ -287,7 +261,6 @@
   };
 
   const showSelfResolution = () => {
-    contactControl.required = false;
     hideAllViews();
     progressWrap.hidden = true;
     selfResolution.hidden = false;
@@ -304,11 +277,6 @@
   };
 
   const showReview = () => {
-    if (!contactControl.checkValidity()) {
-      contactControl.reportValidity();
-      contactControl.focus();
-      return;
-    }
     if (showFirstInvalidStep()) return;
 
     populateReview();
@@ -327,29 +295,23 @@
     switch (button.dataset.action) {
       case "next":
         if (!validateCurrent()) break;
-        if (currentStep === steps.length - 1) showPathStep();
+        if (currentStep === steps.length - 1) showReview();
         else showStep(currentStep + 1);
         break;
       case "prev":
         showStep(currentStep - 1);
         break;
-      case "back-to-questions":
-        showStep(steps.length - 1);
-        break;
-      case "back-to-path":
-        showPathStep();
-        break;
-      case "choose-continue":
-        showContactStep();
-        break;
-      case "choose-self":
-        showSelfResolution();
-        break;
       case "review":
         showReview();
         break;
-      case "edit":
-        showContactStep();
+      case "edit-question":
+        showStep(Number(button.dataset.stepIndex));
+        break;
+      case "show-share":
+        showSelfResolution();
+        break;
+      case "back-to-review":
+        showReview();
         break;
       case "finish-self":
         selfFinish.hidden = false;

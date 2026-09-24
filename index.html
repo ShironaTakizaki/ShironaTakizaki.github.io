@@ -11,9 +11,9 @@
   <meta property="og:title" content="属人性を、持ち運べる形へ。— 滝咲白菜 / Shirona Takizaki">
   <meta property="og:description" content="『あの人だからできる』を、『なぜできるか』から組み直す。">
   <title>属人性を、持ち運べる形へ。— 滝咲白菜 / Shirona Takizaki</title>
-  <link rel="stylesheet" href="styles.css?v=author-card-3">
+  <link rel="stylesheet" href="styles.css?v=self-reflection-1">
     <script src="why-details.js?v=uncertainty-structure-1" defer></script>
-  <script src="app.js?v=method-loop-1" defer></script>
+  <script src="app.js?v=self-reflection-1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">本文へ移動</a>
@@ -22,8 +22,8 @@
     <div class="page-shell header-inner">
       <a class="brand" href="#hero" aria-label="ページの最初へ">滝咲白菜 <span lang="en">/ Shirona Takizaki</span></a>
       <nav aria-label="主要ナビゲーション">
-        <a href="#examples">実例</a>
-        <a href="#intake">話を聞かせてください</a>
+        <a href="#examples">「なぜ？」について</a>
+        <a href="#intake">五つの問い</a>
       </nav>
     </div>
   </header>
@@ -37,8 +37,8 @@
           <p class="hero-thesis">『あの人だからできる』を、<br>『なぜできるか』から組み直す。</p>
           <p class="hero-body">センス、経験、勘と呼ばれている判断を、誰でも検討できる前提と成立条件へ分けます。</p>
           <div class="hero-actions" aria-label="次の選択">
-            <a class="button button-filled primary-action" href="#intake">いま迷っていることを話す</a>
-            <a class="button button-tonal" href="#scope">どこまで考えてくれる？</a>
+            <a class="button button-filled primary-action" href="#intake">あなたの判断を見つめる</a>
+            <a class="button button-tonal" href="#author">プロフィール</a>
           </div>
           <p class="hero-boundary">判断の理由は外へ出せる。<br>最後に残るのは、「誰の判断として、何を守るか」という信念だ。</p>
         </div>
@@ -76,7 +76,7 @@
     <section id="scope" class="section" aria-labelledby="scope-title">
       <div class="page-shell">
         <div class="section-heading">
-          <h2 id="scope-title">どこまで考えてくれる？</h2>
+          <h2 id="scope-title">経験でしか、引き継げないものはありませんか？</h2>
         </div>
         <div class="scope-cards">
           <article class="scope-card scope-card-start">
@@ -98,7 +98,7 @@
     <section id="examples" class="section examples" aria-labelledby="examples-title">
       <div class="page-shell">
         <div class="section-heading">
-          <h2 id="examples-title">こう考えて、こう見せます</h2>
+          <h2 id="examples-title">私に見えている「なぜ？」の形</h2>
         </div>
 
         <div class="case-list">
@@ -339,7 +339,7 @@
     <section id="intake" class="section intake" aria-labelledby="intake-title">
       <div class="page-shell">
         <div class="section-heading">
-          <h2 id="intake-title">まず、話を聞かせてください</h2>
+          <h2 id="intake-title">五つの問いで、自分の答えに気づく。</h2>
         </div>
 
         <form class="intake-form" data-step-form novalidate>
@@ -397,62 +397,39 @@
             <div class="field-support">
               <p class="field-count" id="principle-count"><span data-field-count="principle">0</span> / 1000</p>
             </div>
-            <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="prev">前へ</button><button class="button button-filled" type="button" data-action="next">次へ</button></div>
+            <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="prev">前へ</button><button class="button button-filled" type="button" data-action="review">回答を見直す</button></div>
           </fieldset>
 
-          <fieldset class="form-path" data-path-step>
-            <legend tabindex="-1">書いているうちに、次にすることが見えましたか？</legend>
-            <p class="path-intro">どちらを選んでも、ここまでの回答は送信も保存もされません。</p>
-            <div class="path-options js-only">
-              <button class="path-option" type="button" data-action="choose-continue">
-                <strong>相談を続ける</strong>
-                <span>返信先を入力し、相談内容を確認します。</span>
-              </button>
-              <button class="path-option" type="button" data-action="choose-self">
-                <strong>いったん自分で進める</strong>
-                <span>返信先を入力せず、助かった体験だけを共有できます。</span>
-              </button>
+          <section class="form-review" data-review aria-labelledby="review-title">
+            <h3 id="review-title" tabindex="-1">五つの回答を見直す</h3>
+            <p class="no-js-review">上の回答を読み返し、必要な箇所はそのまま入力欄で直せます。</p>
+            <dl class="review-values">
+              <div><dt>願望</dt><dd data-review-value="wish"></dd><button class="button button-outlined js-only" type="button" data-action="edit-question" data-step-index="0">願望を直す</button></div>
+              <div><dt>具体場面</dt><dd data-review-value="scene"></dd><button class="button button-outlined js-only" type="button" data-action="edit-question" data-step-index="1">具体場面を直す</button></div>
+              <div><dt>したこと／しなかったこと</dt><dd data-review-value="action"></dd><button class="button button-outlined js-only" type="button" data-action="edit-question" data-step-index="2">行動を直す</button></div>
+              <div><dt>反応と気づき</dt><dd data-review-value="response"></dd><button class="button button-outlined js-only" type="button" data-action="edit-question" data-step-index="3">反応と気づきを直す</button></div>
+              <div><dt>守りたいこと／変えたいこと</dt><dd data-review-value="principle"></dd><button class="button button-outlined js-only" type="button" data-action="edit-question" data-step-index="4">守りたいことを直す</button></div>
+            </dl>
+            <div class="step-actions js-only">
+              <button class="button button-filled" type="button" data-action="show-share">共有または終了へ</button>
             </div>
-            <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="back-to-questions">前へ</button></div>
-          </fieldset>
-
-          <fieldset class="form-contact" data-contact-step>
-            <legend tabindex="-1">返信先を教えてください</legend>
-            <label for="contact">メールアドレス</label>
-            <input id="contact" name="contact" type="email" autocomplete="email" maxlength="254">
-            <p class="field-hint">相談を続ける場合だけ使います。この試作では、入力内容はどこにも送信されません。254文字までです。</p>
-            <div class="step-actions js-only"><button class="button button-outlined" type="button" data-action="back-to-path">前へ</button><button class="button button-filled" type="button" data-action="review">入力内容を確認する</button></div>
-          </fieldset>
+          </section>
 
           <section class="self-resolution" data-self-resolution aria-labelledby="self-resolution-title">
-            <p class="self-resolution-kicker">いったん自分で進める</p>
-            <h3 id="self-resolution-title" tabindex="-1">ここで終えて構いません。</h3>
-            <p>入力内容は送信も保存もされません。𝕏（旧twitter）へ渡すのは、下の投稿文とこのページのURLだけです。</p>
+            <p class="self-resolution-kicker">任意で共有する</p>
+            <h3 id="self-resolution-title" tabindex="-1">ここで終えても、体験だけを共有しても構いません。</h3>
+            <p>「𝕏（旧twitter）で感動を伝える」を選んだ場合だけ、下の投稿文とこのページのURLを渡します。</p>
             <label for="share-message">𝕏（旧twitter）へ渡す投稿文</label>
             <textarea id="share-message" data-share-message rows="5" maxlength="100" aria-describedby="share-limit">迷っていたことを5つの問いに沿って書いたら、次に何をするかまで自分で考えられました。これは助かる。</textarea>
             <p class="field-hint share-count" id="share-limit" aria-live="polite">現在 <span data-share-count>49</span> / 100文字</p>
             <p class="share-url"><span>添えるURL</span> https://shironatakizaki.github.io/</p>
-            <p class="prototype-note" id="share-boundary">フォーム回答、返信先、回答から生成した要約は𝕏（旧twitter）へ渡しません。投稿内容は𝕏（旧twitter）上でも編集または中止できます。</p>
+            <p class="prototype-note" id="share-boundary">五つの回答と、回答から生成した要約は𝕏（旧twitter）へ渡しません。投稿内容は𝕏（旧twitter）上でも編集または中止できます。</p>
             <div class="step-actions">
-              <button class="button button-outlined js-only" type="button" data-action="back-to-path">選択へ戻る</button>
+              <button class="button button-outlined js-only" type="button" data-action="back-to-review">回答の見直しへ戻る</button>
               <a class="button button-filled" data-share-link href="https://x.com/intent/tweet?text=迷っていたことを5つの問いに沿って書いたら、次に何をするかまで自分で考えられました。これは助かる。&amp;url=https%3A%2F%2Fshironatakizaki.github.io%2F" target="_blank" rel="noopener noreferrer" aria-describedby="share-boundary">𝕏（旧twitter）で感動を伝える</a>
               <button class="button button-tonal js-only" type="button" data-action="finish-self">投稿せず終了する</button>
             </div>
-            <p class="self-finish" data-self-finish hidden tabindex="-1">ここまでで終了しました。入力内容は送信も保存もされていません。</p>
-          </section>
-
-          <section class="form-review" data-review hidden aria-labelledby="review-title">
-            <h3 id="review-title" tabindex="-1">入力内容の確認</h3>
-            <dl>
-              <div><dt>願望</dt><dd data-review-value="wish"></dd></div>
-              <div><dt>具体場面</dt><dd data-review-value="scene"></dd></div>
-              <div><dt>したこと／しなかったこと</dt><dd data-review-value="action"></dd></div>
-              <div><dt>反応と気づき</dt><dd data-review-value="response"></dd></div>
-              <div><dt>守りたいこと／変えたいこと</dt><dd data-review-value="principle"></dd></div>
-              <div><dt>返信先</dt><dd data-review-value="contact"></dd></div>
-            </dl>
-            <p class="prototype-note">この試作では、入力内容はどこにも送信されません。入力内容は保存されず、このブラウザ内だけにあります。</p>
-            <button class="button button-outlined" type="button" data-action="edit">入力へ戻る</button>
+            <p class="self-finish" data-self-finish hidden tabindex="-1">ここまでで終了しました。</p>
           </section>
         </form>
       </div>
