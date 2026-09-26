@@ -139,29 +139,6 @@
 
   enhanceWhyDetails();
 
-  const enhanceMethodMotion = () => {
-    const motions = Array.from(document.querySelectorAll("[data-method-motion]"));
-    if (!motions.length) return;
-
-    if (!("IntersectionObserver" in window)) {
-      motions.forEach((motion) => motion.classList.add("is-visible"));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          entry.target.classList.toggle("is-visible", entry.isIntersecting);
-        });
-      },
-      { threshold: 0.42 },
-    );
-
-    motions.forEach((motion) => observer.observe(motion));
-  };
-
-  enhanceMethodMotion();
-
   const form = document.querySelector("[data-step-form]");
   if (!form) return;
 

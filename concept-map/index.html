@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>ことばの原理｜概念地図</title>
+  <meta name="description" content="「かわいい」「かっこいい」「美しい」を、概念同士の関係からたどる概念地図の試作です。">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="ポートフォリオへ戻る">
+      <span class="brand-mark" aria-hidden="true">○</span>
+      <span>ことばの原理</span>
+    </a>
+    <div class="topbar-actions">
+      <button id="reset-view" class="button button-quiet" type="button">全体を見る</button>
+      <button id="random-concept" class="button button-accent" type="button">
+        <span aria-hidden="true">↝</span>
+        ランダム選択
+      </button>
+    </div>
+  </header>
+
+  <main class="map-layout">
+    <section class="map-panel" aria-labelledby="map-title">
+      <div class="map-intro">
+        <p class="eyebrow">CONCEPT MAP / PROTOTYPE</p>
+        <h1 id="map-title">概念は、<br>関係によって成り立つ。</h1>
+        <p>カードを選ぶと、直接つながる関係だけが前に出ます。</p>
+      </div>
+
+      <div id="concept-map" class="concept-map" aria-label="概念同士の関係地図">
+        <svg class="edge-layer" aria-hidden="true">
+          <defs>
+            <marker id="arrow-relation" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+              <path d="M0,0 L8,4 L0,8 Z"></path>
+            </marker>
+          </defs>
+          <g class="edges"></g>
+        </svg>
+        <div class="node-layer"></div>
+      </div>
+
+    </section>
+
+    <aside id="concept-detail" class="detail-panel" aria-labelledby="detail-heading" aria-live="polite">
+      <p id="detail-kind" class="detail-kind">地図の読み方</p>
+      <h2 id="detail-heading">概念を一つ選ぶ</h2>
+      <p id="detail-body" class="detail-body">全体では関係の広がりを、選択後は一本ずつの向きと意味を確認できます。</p>
+      <div id="detail-relations" class="detail-relations" hidden>
+        <section id="incoming-group" hidden>
+          <h3>この概念へ入る関係</h3>
+          <ul id="incoming-list"></ul>
+        </section>
+        <section id="outgoing-group" hidden>
+          <h3>この概念から出る関係</h3>
+          <ul id="outgoing-list"></ul>
+        </section>
+      </div>
+      <p class="detail-note">線のない近さや位置には、意味を持たせていません。</p>
+    </aside>
+
+    <noscript>
+      <section class="no-script">
+        <h2>中心概念</h2>
+        <dl>
+          <dt>かわいい</dt>
+          <dd>維持を欲させる容態</dd>
+          <dt>かっこいい</dt>
+          <dd>期待を生じさせる容態</dd>
+          <dt>美しい</dt>
+          <dd>連想が完結する容態</dd>
+        </dl>
+      </section>
+    </noscript>
+  </main>
+
+  <script src="vendor/d3.min.js"></script>
+  <script src="concept-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
